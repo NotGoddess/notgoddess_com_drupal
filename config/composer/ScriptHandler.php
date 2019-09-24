@@ -89,6 +89,11 @@ class ScriptHandler {
   * For future need.
   */
   public static function postUpdateHandler(Event $event) {
+    $fs = new Filesystem();
+    $drupalFinder = new DrupalFinder();
+    $drupalFinder->locateRoot(getcwd());
+    $drupalRoot = $drupalFinder->getDrupalRoot();
+
     // Post update process here...
 
     // reset permissions on some files that may have changed.
