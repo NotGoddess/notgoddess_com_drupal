@@ -1,6 +1,6 @@
 {
     "name": "notgoddess/notgoddess_com_drupal",
-    "description": "Headless Drupal 8 site for NotGoddess.com",
+    "description": "Drupal 8 site for NotGoddess.com",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -21,9 +21,16 @@
         "cweagans/composer-patches": "^1.6.5",
         "drupal-composer/drupal-scaffold": "^2.5",
         "drupal-pattern-lab/unified-twig-extensions": "^0.1.0",
+        "drupal/ckeditor_config": "^2.0",
         "drupal/components": "^1.1",
-        "drupal/console": "^1.0.2",
+        "drupal/console": "^1.9.2",
         "drupal/core": "^8.7.0",
+        "drupal/improve_line_breaks_filter": "^1.2",
+        "drupal/linkit": "^4.3",
+        "drupal/path_redirect_import": "^1.0@beta",
+        "drupal/pathauto": "^1.4",
+        "drupal/redirect": "^1.4",
+        "drupal/simple_sitemap": "^3.3",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
@@ -54,10 +61,10 @@
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "DrupalProject\\composer\\ScriptHandler::postInstallHandler"
         ],
         "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "DrupalProject\\composer\\ScriptHandler::postUpdateHandler"
         ]
     },
     "extra": {

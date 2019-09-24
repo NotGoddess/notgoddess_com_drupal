@@ -1,0 +1,7 @@
+name: 'NotGoddess.com Archival Sitemap'
+type: module
+description: 'Creates a sitemap for archived pages of the old notgoddess.com website'
+core: 8.x
+package: 'Custom'
+dependencies:
+  - simple_sitemap

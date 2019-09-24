@@ -15,7 +15,12 @@ use Webmozart\PathUtil\Path;
 
 class ScriptHandler {
 
-  public static function createRequiredFiles(Event $event) {
+  /*
+  * Post-install function
+  *
+  * Creates required files and directories
+  */
+  public static function postInstallHandler(Event $event) {
     $fs = new Filesystem();
     $drupalFinder = new DrupalFinder();
     $drupalFinder->locateRoot(getcwd());
@@ -47,30 +52,72 @@ class ScriptHandler {
         ],
       ];
       drupal_rewrite_settings($settings, $drupalRoot . '/sites/default/settings.php');
-      $fs->chmod($drupalRoot . '/sites/default/settings.php', 0666);
-      $event->getIO()->write("Created a sites/default/settings.php file with chmod 0666");
+      $fs->chmod($drupalRoot . '/sites/default/settings.php', 0770);
+      $event->getIO()->write("Created a sites/default/settings.php file with chmod 0770");
     }
 
     // Create the files directory with chmod 0777
     if (!$fs->exists($drupalRoot . '/sites/default/files')) {
+
       $oldmask = umask(0);
-      $fs->mkdir($drupalRoot . '/sites/default/files', 0777);
+      $fs->mkdir($drupalRoot . '/sites/default/files', 0775);
       umask($oldmask);
+
       $event->getIO()->write("Created a sites/default/files directory with chmod 0777");
     }
 
-    // Create the log directory and files with chmod 0650
-      if (!$fs->exists($drupalRoot . '/../logs')) {
-        $oldmask = umask(0);
-        $fs->mkdir($drupalRoot . '/../logs', 0650);
-        $fs->touch($drupalRoot . '/../logs/php-error.log', 0664);
-        $fs->touch($drupalRoot . '/../logs/apache-access.log', 0664);
-        $fs->touch($drupalRoot . '/../logs/apache-error.log', 0664);
-        umask($oldmask);
-        $event->getIO()->write("Created log directory");
-      }
+    // Create the log directory and files with chmod 0770
+    if (!$fs->exists($drupalRoot . '/../logs')) {
+
+      $oldmask = umask(0);
+      $fs->mkdir($drupalRoot . '/../logs', 0770);
+      $fs->touch($drupalRoot . '/../logs/php-error.log', 0660);
+      $fs->touch($drupalRoot . '/../logs/apache-access.log', 0660);
+      $fs->touch($drupalRoot . '/../logs/apache-error.log', 0660);
+      umask($oldmask);
+      $event->getIO()->write("Created log directory");
+    }
 
   }
+
+
+
+
+  /*
+  * Post-update function
+  *
+  * For future need.
+  */
+  public static function postUpdateHandler(Event $event) {
+    $fs = new Filesystem();
+    $drupalFinder = new DrupalFinder();
+    $drupalFinder->locateRoot(getcwd());
+    $drupalRoot = $drupalFinder->getDrupalRoot();
+
+    // Post update process here...
+
+    // reset permissions on some files that may have changed.
+    // These are looser permissions. Tighten as needed.
+
+    // Save current umask
+    $oldmask = umask(0);
+    // Make settings.php read/execute only.
+    $fs->chmod($drupalRoot . '/sites/default/settings.php', 0550);
+    $event->getIO()->write("Reset permissions on settings.php to 0550");
+
+    // Reset the default files directory
+    if ($fs->exists($drupalRoot . '/sites/default/files')) {
+      $fs->chmod($drupalRoot . '/sites/default/files', 0775);
+      $event->getIO()->write("Reset permissions on settings.php to 0775");
+
+      // Todo: traverse files and set folders to 0775 files to 0664
+    }
+    // reset umask to original setting
+    umask($oldmask);
+
+  }
+
+
 
   /**
    * Checks if the installed version of Composer is compatible.
