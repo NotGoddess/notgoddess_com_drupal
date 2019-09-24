@@ -66,17 +66,24 @@ class ScriptHandler {
       $event->getIO()->write("Created a sites/default/files directory with chmod 0777");
     }
 
+
     // Create the log directory and files with chmod 0770
+    $oldmask = umask(0);
     if (!$fs->exists($drupalRoot . '/../logs')) {
 
-      $oldmask = umask(0);
       $fs->mkdir($drupalRoot . '/../logs', 0770);
-      $fs->touch($drupalRoot . '/../logs/php-error.log', 0660);
-      $fs->touch($drupalRoot . '/../logs/apache-access.log', 0660);
-      $fs->touch($drupalRoot . '/../logs/apache-error.log', 0660);
-      umask($oldmask);
       $event->getIO()->write("Created log directory");
     }
+    if (!$fs->exists($drupalRoot . '/../logs/php-error.log')) {
+      $fs->touch($drupalRoot . '/../logs/php-error.log', 0660);
+    }
+    if (!$fs->exists($drupalRoot . '/../logs/apache-error.log')) {
+      $fs->touch($drupalRoot . '/../logs/apache-error.log', 0660);
+    }
+    if (!$fs->exists($drupalRoot . '/../logs/apache-access.log')) {
+      $fs->touch($drupalRoot . '/../logs/apache-access.log', 0660);
+    }
+    umask($oldmask);
 
   }
 
@@ -102,8 +109,10 @@ class ScriptHandler {
     // Save current umask
     $oldmask = umask(0);
     // Make settings.php read/execute only.
-    $fs->chmod($drupalRoot . '/sites/default/settings.php', 0550);
-    $event->getIO()->write("Reset permissions on settings.php to 0550");
+    if ($fs->exists($drupalRoot . '/sites/default/settings.php')) {
+      $fs->chmod($drupalRoot . '/sites/default/settings.php', 0550);
+      $event->getIO()->write("Reset permissions on settings.php to 0550");
+    }
 
     // Reset the default files directory
     if ($fs->exists($drupalRoot . '/sites/default/files')) {
