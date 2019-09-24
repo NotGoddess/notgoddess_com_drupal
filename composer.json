@@ -1,6 +1,6 @@
 {
     "name": "notgoddess/notgoddess_com_drupal",
-    "description": "Headless Drupal 8 site for NotGoddess.com",
+    "description": "Drupal 8 site for NotGoddess.com",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -60,10 +60,10 @@
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "DrupalProject\\composer\\ScriptHandler::postInstallHandler"
         ],
         "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "DrupalProject\\composer\\ScriptHandler::postUpdateHandler"
         ]
     },
     "extra": {
