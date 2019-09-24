@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Contains ng_archival_sitemap.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function ng_archival_sitemap_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the ng_archival_sitemap module.
+    case 'help.page.ng_archival_sitemap':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Creates a sitemap for archived pages of the old notgoddess.com website') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Add arbitrary links to the sitemap.
+ *
+ * @param array &$arbitrary_links
+ * @param string|null $sitemap_variant
+ */
+function ng_archival_sitemap_simple_sitemap_arbitrary_links_alter(array &$arbitrary_links, $sitemap_variant) {
+  // Add an arbitrary link to the 'notgoddess_com_archive' sitemap variant only.
+  switch ($sitemap_variant) {
+    case 'default':
+      // Note: not really the proper way to do this but it will work.
+      include_once(dirname(__FILE__) .'/ng_archival_links.inc');
+      break;
+  }
+}
+
