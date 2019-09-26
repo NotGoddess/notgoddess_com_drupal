@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "130d30b9f83b5a7703fa47762beaf62a",
+    "content-hash": "b36c7223ee0493675c92847b75465da2",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1984,6 +1984,57 @@
             }
         },
         {
+            "name": "drupal/popular_tags",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/popular_tags.git",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/popular_tags-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "0c2a20b94d8994f2009ba26e9913e9b2502f805a"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1567435084",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Jitesh Doshi",
+                    "homepage": "https://www.drupal.org/user/1799550"
+                },
+                {
+                    "name": "brooke_heaton",
+                    "homepage": "https://www.drupal.org/user/402231"
+                }
+            ],
+            "description": "Allows the users to select taxonomy terms/tags by just clicking on them rather than typing them (auto-complete) or selecting them from a select box/checkbox/radio etc. It shows them a list of tag links, sorted by popularity (defined as how many nodes are tagged with it), up to a configurable maximum number.",
+            "homepage": "https://www.drupal.org/project/popular_tags",
+            "support": {
+                "source": "https://git.drupalcode.org/project/popular_tags"
+            }
+        },
+        {
             "name": "drupal/redirect",
             "version": "1.4.0",
             "source": {
@@ -2678,6 +2729,44 @@
                 "php"
             ],
             "time": "2019-09-01T07:51:21+00:00"
+        },
+        {
+            "name": "notgoddess/ardent",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/NotGoddess/ardent.git",
+                "reference": "115fc028e0f73a4a5222c0a8938583cacffbaeca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/NotGoddess/ardent/zipball/115fc028e0f73a4a5222c0a8938583cacffbaeca",
+                "reference": "115fc028e0f73a4a5222c0a8938583cacffbaeca",
+                "shasum": ""
+            },
+            "type": "drupal-custom-theme",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Sara Jacobson (notgoddess)",
+                    "homepage": "https://www.drupal.org/u/notgoddess",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Drupal 8 theme that aims to be ardent a11y to accessibility",
+            "homepage": "https://github.com/notgoddess/ardent",
+            "support": {
+                "issues": "https://github.com/notgoddess/ardent/issues",
+                "source": "https://github.com/NotGoddess/ardent/tree/master"
+            },
+            "time": "2019-09-26T14:42:05+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -7659,7 +7748,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/path_redirect_import": 10
+        "drupal/path_redirect_import": 10,
+        "notgoddess/ardent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
