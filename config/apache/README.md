@@ -50,6 +50,17 @@ If not using SNI:
 
 Adjust other values if needed.
 
+#### PHP module settings
+These only apply if you are loading PHP via module
+If using PHP FPM, you can add the settings to a .user.ini file
+See: https://secure.php.net/manual/en/configuration.file.per-user.php
+
+I use IfModule to ensure these settings won't break Apache.
+You may want it to break on errors - if so comment out the <IfModule> directives
+The module name may change - refer to Apache httpd.conf for name
+Then check via phpinfo on the site to verify 'Local Value' matches settings
+
+#### SSL VirtualHost
 Comment out with `#` or remove the SSL section if you aren't using it.
 Note: If you aren't using it because you aren't sure how to set up SSL on localhost, Google it - it's not too hard.  You can do it. I believe in you.
 
