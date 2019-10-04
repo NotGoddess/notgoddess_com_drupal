@@ -4,6 +4,11 @@
 #  RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
 #  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
 </IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch ".(js|css|xml|gz|html)$">
+    Header append Vary: Accept-Encoding
+  </FilesMatch>
+</IfModule>
 
 #
 # Apache/PHP/Drupal settings:
